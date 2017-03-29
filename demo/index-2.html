@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Author" content="visdark"/>
+    <meta name="Copyright" content="visdark"/>
+    <meta name="keywords" content="关键字A,B,C"/>
+    <meta name="description" content="MIT"/>
+    <title>FXBTG手机端微官网</title>
+    <script src="js/flexible.js"></script><!-- 缩放屏幕比例 -->
+    <link rel="stylesheet" href="css/font-awesome.min.css"> <!-- 图标库 -->
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_10fchrgpf7x03sor.css">
+    <link rel="stylesheet" href="css/swiper.min.css"> <!-- 插件：滑动 -->
+    <link rel="stylesheet" href="css/vis-app.css"> <!-- 主框架文件 -->
+    <link rel="stylesheet" href="css/vis-do.css"> <!-- 插件：动画库 -->
+    <link rel="stylesheet" href="css/vis-index.css"> <!-- 首页专属样式表 -->
+    <script src="js/vue.min.js"></script><!-- vue -->
+    <script src="js/vue-router.min.js"></script><!-- 路由 -->
+    <script>
+        /*******************************************
+         *
+         * 创建人：Quber（qubernet@163.com）
+         * 创建时间：2014年6月10日
+         * 创建说明：Base=>页面加载（loading）效果
+         *
+         * 修改人：
+         * 修改时间：
+         * 修改说明：
+         *
+         *********************************************/
+
+//获取浏览器页面可见高度和宽度
+        var _PageHeight = document.documentElement.clientHeight,
+                _PageWidth = document.documentElement.clientWidth;
+        //计算loading框距离顶部和左部的距离（loading框的宽度为215px，高度为61px）
+        var _LoadingTop = _PageHeight > 61 ? (_PageHeight - 61) / 2 : 0,
+                _LoadingLeft = _PageWidth > 61 ? (_PageWidth - 61) / 2 : 0;
+        //在页面未加载完毕之前显示的loading Html自定义内容
+        var _LoadingHtml = '<div id="loadingDiv" style="position:absolute;left:0;width:100%;height:' + _PageHeight + 'px;top:0;background:#f3f8ff;opacity:1;filter:alpha(opacity=80);z-index:9999999;"><div style="position: absolute; cursor1: wait; left: ' + _LoadingLeft + 'px; top:' + _LoadingTop + 'px; width: auto; height: 57px; line-height: 57px; padding-left: 50px; padding-right: 5px; background: url(src/loading.gif) no-repeat scroll 5px 10px;"></div></div>';
+        //呈现loading效果
+        document.write(_LoadingHtml);
+
+        //window.onload = function () {
+        //    var loadingMask = document.getElementById('loadingDiv');
+        //    loadingMask.parentNode.removeChild(loadingMask);
+        //};
+
+        //监听加载状态改变
+        document.onreadystatechange = completeLoading;
+
+        //加载状态为complete时移除loading效果
+        function completeLoading() {
+            if (document.readyState == "complete") {
+                var loadingMask = document.getElementById('loadingDiv');
+                loadingMask.parentNode.removeChild(loadingMask);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="top-nav" id="main-nav">
+            <div class="box">
+                关于信用卡入金支付方式暂停使用的通知
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="app">
+    <transition name="custom-classes-transition" enter-active-class="animated bounceIn" leave-active-class="animated bounceOutRight">
+        <div v-if="show">
+            <!-- 焦点图 -->
+            <section class="index">
+                <div class="container">
+                    <div class="swiper-container" id="swiper-top">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="src/a.jpg" style="width:100%; height:6rem;"></div>
+                            <div class="swiper-slide"><img src="src/b.jpg" style="width:100%; height:6rem;"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- 产品列表 -->
+            <section class="index">
+                <div class="container">
+                    <div class="" id="pro-list">
+                        <div class="flex flex-box wrap avg-4 bordered">
+                            <a href="pro.html#/pro/0" class="col pro"><img src="src/p-01.png">
+                                关于我们</a>
+                            <a href="pro.html#/pro/1" class="col pro"><img src="src/p-02.png">
+                                资金安全</a>
+                            <a href="pro.html#/pro/2" class="col pro"><img src="src/p-03.png">
+                                监管与许可</a>
+                            <a href="pro.html#/pro/3" class="col pro"><img src="src/p-04.png">
+                                深度流动性</a>
+                            <a href="pro.html#/pro/4" class="col pro"><img src="src/p-05.png">
+                                交易产品</a>
+                            <a href="pro.html#/pro/5" class="col pro"><img src="src/p-06.png">
+                                交易平台</a>
+                            <a href="pro.html#/pro/6" class="col pro"><img src="src/p-07.png">
+                                联系我们</a>
+                            <a href="pro.html#/pro/7" class="col pro"><img src="src/p-08.png">
+                                更多</a></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 广告列表1 -->
+            <section class="index">
+                <div class="container">
+                    <div id="ad-list1">
+                        <div class="flex box bordered">
+                            <div class="col">
+                                <a href="#" class="ad"><img src="src/top-ad-main.png">
+                                    <div class="con"><h4>平台下载</h4>
+                                        <p>提供电脑端、移动端MT4</p><span class="btn">了解详情</span></div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <div class="flex column bordered">
+                                    <div class="col">
+                                        <a href="#" class="ad"><img src="src/top-ad-5.png">
+                                            <div class="con"><h4></h4>
+                                                <p>全国第一家金融TV</p><span class="btn">观看节目</span></div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="ad"><img src="src/top-ad-6.png">
+                                            <div class="con"><h4>财经日历</h4>
+                                                <p>最及时可靠的动态播报</p><span class="btn">了解详情</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 广告列表2 -->
+            <section class="index">
+                <div class="container">
+                    <div class="" id="ad-list2">
+                        <div class="flex box wrap avg-2 bordered"><a href="#" class="col ad"><img src="src/top-ad-1.png">
+                            <div class="con"><h4>合作加盟</h4>
+                                <p>与FXBTG探寻新的发展机会</p><span class="btn">了解详情</span></div>
+                        </a><a href="#" class="col ad"><img src="src/top-ad-2.png">
+                            <div class="con"><h4>每日汇评</h4>
+                                <p>我们追逐梦想，一往无前</p><span class="btn">了解详情</span></div>
+                        </a><a href="#" class="col ad"><img src="src/top-ad-3.png">
+                            <div class="con"><h4>账户类型</h4>
+                                <p>两种账户供君选择</p><span class="btn">了解详情</span></div>
+                        </a><a href="#" class="col ad"><img src="src/top-ad-4.png">
+                            <div class="con"><h4>视频中心</h4>
+                                <p>最前沿的视觉盛宴</p><span class="btn">了解详情</span></div>
+                        </a></div>
+                    </div>
+                </div>
+            </section>
+            <!-- 新闻活动列表 -->
+            <section id="news">
+                <div class="container">
+                    <div class="box-act">
+                        <div class="tit"><i class="visiis vis-notice"></i> 精彩活动</div>
+                        <div class="con">
+                            <div class="flex wrap col-left"><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-1.jpg"><h4>同行九载，一路有你</h4>
+                                    <p>入金满额尊享VIP或高级代理2个月，无手数限制！</p></div>
+                            </a><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-2.jpg"><h4>入金既享受10%赠金</h4>
+                                    <p>最高10000美金，入金越多，赠金越多</p></div>
+                            </a><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-3.jpg"><h4>入金送iPhone</h4>
+                                    <p>重新定义一部手机，重新定义一个行业</p></div>
+                            </a><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-4.jpg"><h4>声明书</h4>
+                                    <p>关于“山寨”网站侵权声明书</p></div>
+                            </a><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-5.jpg"><h4>深度流动时代到来</h4>
+                                    <p>与FXBTG探寻新的发展机会</p></div>
+                            </a><a href="#" class="col col-3">
+                                <div class="new-pics"><img src="src/new-6.jpg"><h4>每日汇评</h4>
+                                    <p>我们追逐梦想，一往无前</p></div>
+                            </a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 推送信息 -->
+            <section>
+                <div class="container" id="day">
+                    <div class="tit"><i class="visiis vis-notice"></i> 金融推送</div>
+                    <div class="con">
+                        <div class="day flex wrap">
+                            <div class="col col-1 con-1">每日汇评</div>
+                            <div class="col col-2 con-2"><span>16年12月13日</span><span><b>December</b>2016</span></div>
+                            <div class="col col-3 con-3"><span>13</span></div>
+                        </div>
+                        <div class="day flex wrap">
+                            <div class="col col-2 con-2"><span>16年12月13日</span><span><b>December</b>2016</span></div>
+                            <div class="col col-4 con-3"><span>13</span></div>
+                        </div>
+                        <div class="day-con">
+                            <h2 class="vis-h1">FXBTG:冻产协议达成，油价暴涨10%</h2>
+                            <section class="mainBody">
+                                <h2>行情回顾</h2>
+
+                                <p>黄金周一开盘高开高走，亚盘最高涨至1257.9，上涨130余点；此前的上涨态势保持完好。与黄金走势相反美元兑日元亚盘期间出现大幅度下挫，下挫近百点，最低跌至110.247，当前汇价坚守110整数关口。恒指方面，开盘跳空200余点，但随后再次收起，基本收复开盘跳空。</p>
+
+                                <h2>市场概况</h2>
+
+                                <p>上周市场聚焦特朗普的首次改革医保法案的投票改革，经历了推迟投票等挫折后，最终流产，未获通过，特朗普撤销医改法案投票，并表示短期内不会再推行医改法案投票。市场此前对于特朗普上台后欣喜若狂到现在变得谨慎；对于特朗普此前做出的众多改革承诺，开始怀疑，市场情绪开始变化。</p>
+
+                                <h2>图表分析</h2>
+
+                                <h3><strong>EURUSD</strong></h3>
+
+                                <p>欧元日前上涨态势完好且各周期未出现任何下跌信号，持续看涨。日内以逢低买入为主，可选择再小周期进行震荡型逢低买入，下方短期支撑1.08238。</p>
+
+                                <p>&nbsp;</p>
+
+                                <p><img alt="" src="https://static.fxbtg-bank.com/UploadImages/2017/3/27/219718b5-3c39-41ea-90bf-0cae2361337c.png"></p>
+
+                                <h3><strong>GBPUSD</strong></h3>
+
+                                <p>英镑当前涨势维持，处于高位震荡走势，在黄金欧元上冲的过程中稍显疲软；当前价格区间保持观望，谨慎做多；日内或出现小幅度小幅度下挫。</p>
+
+                                <p>&nbsp;</p>
+
+                                <p><img alt="" src="https://static.fxbtg-bank.com/UploadImages/2017/3/27/1f515fba-1cbc-4158-a604-7606aee950d6.png">​</p>
+
+                                <h3><strong>USDJPY</strong></h3>
+
+                                <p>日元自非农走时候到目前形成M30级别的下跌趋势，下跌力度较强；但仍未达到级别扩展的结构；当前价格的下得趋势呈现底背驰迹象，进入空头的收货时刻，而非继续加空时段。日内短线价格反弹关键点位110.723。当前价格仍处于下跌态势中，但需关注是否会成为级别扩展或这新的短线走势的转折点。</p>
+
+                                <p>&nbsp;</p>
+
+                                <p><img alt="" src="https://static.fxbtg-bank.com/UploadImages/2017/3/27/025ffb39-15b7-4cf5-a0b9-aecbf2377bfe.png"></p>
+
+                                <p>&nbsp;</p>
+
+                                <h3><strong>XAUUSD</strong></h3>
+
+                                <p>黄金短期上涨态势明确，持续看多。日内以逢低买入为主思路，勿追高入场。</p>
+
+                                <p>&nbsp;</p>
+
+                                <p><img alt="" src="https://static.fxbtg-bank.com/UploadImages/2017/3/27/a266aa34-079f-4ca6-a7a3-ad516f539efa.png"></p>
+
+                                <p>&nbsp;</p>
+
+                                <h3><strong>USOil</strong></h3>
+
+                                <p>原油当前仍维持此前的下跌态势，且当前走势仍然偏弱，后市持续看空，以逢高做空为主思路。短期上方压制为48.45。</p>
+
+                                <p>&nbsp;</p>
+
+                                <p><img alt="" src="https://static.fxbtg-bank.com/UploadImages/2017/3/27/ae0e49f9-80af-44c2-9188-5f455f92e3ce.png"></p>
+
+                                <p>&nbsp;</p>
+
+                                <h2>今日关注</h2>
+
+                                <p>16:00 德国3月IFO商业景气指数<br>
+                                    22:30 美国3月达拉斯联储商业活动指数</p>
+
+                            </section>
+
+
+
+
+
+                            <h2 class="vis-h1">FXBTG:冻产协议达成，油价暴涨10%</h2>
+                            <div>
+                                <h2>行情回顾</h2>
+                                <p>
+                                    昨天（11月30日），受欧佩克达成减产协议推动，油价暴涨10%，使得全球风险资产再次受到追捧，黄金、日元等避险资产严重受到打压，其中黄金价格跌至10个月低位，美元兑日元日内急升1.9%，至3月2日以来最高114.53。此外，于昨晚间公布的美国11月ADP就业人数增加了21.6万人，数据公布后，市场对周五非农就业数据预期表示乐观，美元大幅上扬，，再度打压金银价格。</p>
+                                <h2>市场概况</h2>
+
+                                <p>
+                                    昨天（11月30日），受欧佩克达成减产协议推动，油价暴涨10%，使得全球风险资产再次受到追捧，黄金、日元等避险资产严重受到打压，其中黄金价格跌至10个月低位，美元兑日元日内急升1.9%，至3月2日以来最高114.53。此外，于昨晚间公布的美国11月ADP就业人数增加了21.6万人，数据公布后，市场对周五非农就业数据预期表示乐观，美元大幅上扬，，再度打压金银价格。</p>
+                            </div>
+                            这里是更新后的界面示范
+                            <h1>FXBTG：聚焦美联储官员讲话</h1> <div class="con"><span style="background:#FF6200;font-family:SimSun;font-size:16px;">行情回顾</span> <br>
+                            <h2>行情回顾</h2>
+                            <span style="font-family:SimSun;font-size:14px;"> 昨天（3月20日），美元指数走出震荡，市场表现较为平静；欧元兑美元以及美元兑日元等主流非美货币对，走势也以震荡为主，日内波幅有限；黄金方面，金价也变现为震荡调整；对于非美货币及黄金而言在一段多头行情过后，自然会有调整的走势，此时最易出现非美货币分化的状况，但整体看多的节奏并未变。</span><br>
+                            <br>
+                            <span style="background:#FF6200;font-family:SimSun;font-size:16px;">市场概况</span> <br>
+                            <span style="font-family:SimSun;font-size:14px;"> 今天（3月21日）将公布澳洲联储3月货币政策会议纪要，以及美联储多位官员发表讲话。美联储主席以及部分官员的讲话，加息之后再次向市场公开发言，纵然保持此前鹰派的论调，很难提振美元多头信心，在3月加息之后，普遍预期5月初不会加息，关键看6月份。由于没有重大美国经济指标，因此美联储官员讲话将成为影响美元走势的主要因素。</span><br>
+                            <br>
+                            <span style="background:#FF6200;font-family:SimSun;font-size:16px;">图表分析</span> <br>
+                            <h2>图标分析</h2>
+                            <h3>EUR/USD</h3>
+                            <span style="font-family:SimSun;font-size:14px;"> H4周期：震荡走势，震荡区间为1.0704—1.0782；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> M30周期：小级别处于盘整，关注1.0704、1.0782等位置的表现；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 建议策略：依据M30图表，若价格回调运行至1.0704—1.0725区域，短线进场做多；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 备选策略：若价格下跌并跌破1.0704，则短线进场做空。</span><br>
+                            <br>
+                            <img src="https://static.fxbtg-bank.com/UploadImages/2017/3/21/451c18b4-5943-43c1-8457-5bc2aa94110d.png" alt=""><br>
+                            <br>
+                            <strong><span style="font-family:SimSun;font-size:14px;">GBP/USD </span></strong><span style="font-family:SimSun;font-size:14px;">&nbsp;</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> H4周期：价格测试该级别拐点压力线之后，受到压制回落，目前陷入震荡走势当中；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> M30周期：上涨之后的震荡调整，但多头方向并未改变；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 建议策略：依据M30图表，若价格运行至1.2306—1.2332区域，短线进场做多；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 备选策略：若价格跌破1.2306，则短线进场做空。</span><br>
+                            <br>
+                            <img src="https://static.fxbtg-bank.com/UploadImages/2017/3/21/327b967c-f4e1-4d7b-aeb8-b67cca907700.png" alt=""><br>
+                            <br>
+                            <h3> <strong><span style="font-family:SimSun;font-size:14px;">USD/JPY</span></strong><span style="font-family:SimSun;font-size:14px;"> &nbsp;</span></h3><br>
+                            <span style="font-family:SimSun;font-size:14px;"> H4周期：下跌走势，目标位置为111.58一带；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> M30周期：下跌之后的小幅震荡整理，关注整理完毕，空头的交易机会；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 建议策略：依据M30图表，价格有效跌破112.42，则短线进场做空；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 备选策略：若价格站稳112.90上方，则进场做多。</span><br>
+                            <br>
+                            <img src="https://static.fxbtg-bank.com/UploadImages/2017/3/21/fe0af68a-7858-455d-b0e5-37e90b9890dc.png" alt=""><br>
+                            <br>
+                            <strong><span style="font-family:SimSun;font-size:14px;">XAU/USD</span></strong><br>
+                            <span style="font-family:SimSun;font-size:14px;"> H4周期：上涨走势，关注1236.9一带压制位置的得失；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> M30周期：震荡走势，整体仍偏多头，保持做多思路；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 建议策略：依据M30图表，价格有效突破1236.9，短线进场做多；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 备选策略：若价格再1236.9附近被打压回落，并在1229.8下方企稳，则进场进空。</span><br>
+                            <br>
+                            <img src="https://static.fxbtg-bank.com/UploadImages/2017/3/21/4c926566-361f-49d5-bb96-ccb9ce24fda9.png" alt=""><br>
+                            <br>
+                            <strong><span style="font-family:SimSun;font-size:14px;">USOiL</span></strong><span style="font-family:SimSun;font-size:14px;"> &nbsp;</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> D1周期：价格处于震荡走势；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> H4周期：该级别价格也处于震荡，震荡区间为47.1—50.1；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 建议策略：依据H4周期图表，价格运行至49.6—50.8区域，短线进场做空；</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> 备选策略：若价格运行至47.10—47.60区域，短线进场做多。</span><br>
+                            <br>
+                            <img src="https://static.fxbtg-bank.com/UploadImages/2017/3/21/c1359c9c-702f-4d9b-a163-b5bad63d53a5.png" alt=""><br>
+                            <br>
+                            <span style="background:#FF6200;font-family:SimSun;font-size:16px;">今日关注</span> <br>
+                            <span style="font-family:SimSun;font-size:14px;"> ① 08:30 澳洲联储公布3月货币政策会议纪要</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> ② 15:00 瑞士2月贸易帐</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> ③ 17:30 英国2月CPI月率、英国2月零售物价指数月率</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> ④ 19:00 英国3月CBI工业订单差值</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> ⑤ 20:30 加拿大1月零售销售月率、美国第四季度经常帐</span><br>
+                            <span style="font-family:SimSun;font-size:14px;"> ⑥ 次日04:30 美国至3月17日当周API原油库存</span><br></div>
+
+                            结束代码
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            这里是更新后的界面示范
+            结束代码
+        </div>
+    </transition>
+
+    <div class="hide">
+        <transition name="custom-classes-transition" enter-active-class="animated fadeInDown" leave-active-class="animated bounceOutRight">
+            <div v-if="!show" class="tree">
+                <div class="tree-list">
+                    <h3><i class="visiis vis-notice"></i> 网站导航</h3>
+                    <h4>关于</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="about.html"><div class="btn">FXBTG 金融集团</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">为什么选择我们</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">监管与许可</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">企业荣誉</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">资金安全</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">社会责任</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">商业模式</div></a>
+                        <a class="col nav-a" href="about.html"><div class="btn">联系我们</div></a>
+                    </div>
+                    <h4>商品</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="pro.html"><div class="btn">外汇</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">贵金属</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">能源</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">股指</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">农产品</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">差价合约</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">原油</div></a>
+                        <a class="col nav-a" href="pro.html"><div class="btn">其他</div></a>
+                    </div>
+                    <h4>下载</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="down.html"><div class="btn">FXBTG 微单</div></a>
+                        <a class="col nav-a" href="down.html"><div class="btn">MT4</div></a>
+                        <a class="col nav-a" href="down.html"><div class="btn">资源下载</div></a>
+                    </div>
+                    <h4>视频</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="TNTV.html"><div class="btn">TNTV直播</div></a>
+                        <a class="col nav-a" href="intro.html"><div class="btn">每日一波</div></a>
+                        <a class="col nav-a" href="video.html"><div class="btn">企业宣传片</div></a>
+                    </div>
+                    <h4>资讯</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="daylist.html"><div class="btn">经济日历</div></a>
+                        <a class="col nav-a" href="day.html"><div class="btn">每日分析</div></a>
+                        <a class="col nav-a" href="new.html"><div class="btn">系统公告</div></a>
+                        <a class="col nav-a" href="imgnew.html"><div class="btn">财经资讯</div></a>
+                        <a class="col nav-a" href="imgnew.html"><div class="btn">活动中心</div></a>
+                    </div>
+                    <h4>帮助</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="help.html"><div class="btn">新手常见问题</div></a>
+                        <a class="col nav-a" href="help.html"><div class="btn">财务充值问题</div></a>
+                        <a class="col nav-a" href="help.html"><div class="btn">交易常见问题</div></a>
+                        <a class="col nav-a" href="help.html"><div class="btn">外汇问题</div></a>
+                        <a class="col nav-a" href="help.html"><div class="btn">黄金问题</div></a>
+                        <a class="col nav-a" href="help.html"><div class="btn">关于取款问题</div></a>
+                    </div>
+                    <h4>工具</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="IB.html"><div class="btn">查询IB</div></a>
+                        <a class="col nav-a" href="book.html"><div class="btn">建议反馈</div></a>
+                    </div>
+                    <h4>我的</h4>
+                    <div class="flex wrap avg-2">
+                        <a class="col nav-a" href="me.html"><div class="btn">登录 FXBTG</div></a>
+                        <a class="col nav-a" href="reg.html"><div class="btn">立即开户</div></a>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+    <footer>
+        <div id="foot">
+            <div class="flex wrap avg-5 navbar"><a class="col nav-a" href="index.html" data-rel="auto"><i
+                    class="visiis vis-home"></i><h4>首页</h4></a><a class="col nav-a" href="down.html" data-rel="auto"><i
+                    class="visiis vis-down"></i><h4>下载</h4></a><a class="col nav-a" href="intro.html" data-rel="auto"><i
+                    class="visiis vis-tntv"></i><h4>TNTV</h4></a><a class="col nav-a" href="me.html" data-rel="auto"><i
+                    class="visiis vis-me"></i><h4>我的</h4></a>
+                <a class="col more" @click="show = !show"  onclick="pageScroll()"><i class="visiis vis-more"></i><h4>更多</h4></a>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+<!-- 主JS框架 -->
+<script src="js/zepto.min.js"></script><!-- zeptojs -->
+<!-- JS插件 -->
+<script src="js/swiper.min.js"></script><!-- 插件：swiper滑动 -->
+<script src="//cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script><!-- 插件：数据绑定支持 -->
+<script src="//cdn.bootcss.com/axios/0.15.3/axios.min.js"></script><!-- 插件：数据读写支持 -->
+
+</html>
+<script>
+    /*============================================
+     顶部导航
+     ==============================================*/
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() < 10) {
+                $('#main-nav').removeClass('scrolled');
+            }
+            else {
+                $('#main-nav').addClass('scrolled');
+            }
+        });
+    });
+    /*============================================
+     滚动到顶部js
+     ==============================================*/
+    function pageScroll(){
+//把内容滚动指定的像素数（第一个参数是向右滚动的像素数，第二个参数是向下滚动的像素数）
+        window.scrollBy(0,-10000);
+//延时递归调用，模拟滚动向上效果
+        scrolldelay = setTimeout('pageScroll()',10000);
+//获取scrollTop值，声明了DTD的标准网页取document.documentElement.scrollTop，否则取document.body.scrollTop；因为二者只有一个会生效，另一个就恒为0，所以取和值可以得到网页的真正的scrollTop值
+        var sTop=document.documentElement.scrollTop+document.body.scrollTop;
+//判断当页面到达顶部，取消延时代码（否则页面滚动到顶部会无法再向下正常浏览页面）
+        if(sTop==0) clearTimeout(scrolldelay);
+    }
+</script>
+
+
+
+<script>
+    /*============================================
+     顶部焦点图 （仅首页）
+     ==============================================*/
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+    });
+    /*============================================
+     首页数据流
+     ==============================================*/
+    new Vue({
+        el: '#app',
+        data: {
+            show: true
+        }
+    })
+</script>
